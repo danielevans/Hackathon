@@ -41,7 +41,6 @@ const Layout = ({ children }) => (
           {children}
         </div>
         <Footer />
-        Checking.
       </>
     )}
   />
