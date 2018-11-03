@@ -1,4 +1,14 @@
-.uploadOptions {
+
+.upload__options {
     display: flex;
     flex-direction: row;
+    margin: 0 5%;
+}
+.upload__url {
+    width:50%;
+    text-align: center;
+}
+.upload__link {
+    width:50%;
+    text-align: center;
 }
