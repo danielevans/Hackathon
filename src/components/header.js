@@ -4,7 +4,7 @@ import { Link } from 'gatsby'
 export default props => (
   <div
     style={{
-      background: 'rgb(13, 136, 237)',
+      background: '#3A606E',
       marginBottom: '2rem',
     }}
   >
