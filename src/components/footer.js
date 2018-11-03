@@ -1,9 +1,10 @@
 import React from 'react'
 import { Link } from 'gatsby'
-import './components.css'
+import './css/footer.css'
+import { Card, CardImg, CardTitle, CardText, CardBody, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 
 const Footer = () => (
-  <div className="Footer">
+  <div className="footer">
     <div className="footerContent">
       <p style={{ margin: 0 }}>
         © 2018, PDX Hackathon Group with Peter, Daniel1, DanielA, Aaron, and Tony!

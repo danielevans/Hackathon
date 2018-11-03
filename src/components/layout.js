@@ -6,7 +6,7 @@ import {Link} from 'gatsby'
 import Header from './header'
 import ImageUpload from './ImageUpload'
 import Footer from './footer'
-import './layout.css'
+import './css/layout.css'
 import { Card, CardImg, CardTitle, CardText, CardBody, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 
 const Layout = ({children}) => (<StaticQuery query={graphql `
