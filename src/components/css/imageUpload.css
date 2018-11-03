@@ -1,3 +1,4 @@
+/* image upload css */
 .upload__options {
   display: flex;
   flex-direction: row;
@@ -7,7 +8,43 @@
   width:50%;
   text-align: center;
 }
+.upload__input{
+  width:70%;
+}
 .upload__link {
   width:50%;
   text-align: center;
 }
+.image__display{
+  display:flex;
+  flex-direction: row;
+  margin-top:30px;
+  
+}
+.image__div{
+  width:50%;
+  text-align: center;
+}
+.image {
+  height:40vh;
+  
+}
+.image__tags{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height:65px;
+  width:50%;
+  margin-left:10px;
+  
+}
+.image__tag{
+  border: 1px solid grey;
+  background-color: rgba(58,96,110, .9);
+  color: white;
+  border-radius:5px;
+  padding: 0px 5px;
+  margin: 3px;
+  height:30px;
+}
+
