@@ -54,8 +54,8 @@ class ImageUpload extends React.Component {
                     </div>
                 </div>
                 <div className="image__display">
-                    <img src={this.state.url}></img>
-                    
+                    <img alt="" src={this.state.url}></img>
+
                     <h2>tags</h2>
                     <ul>
                     {this.state.tags.map((tag)=><li>{tag}</li>)}
