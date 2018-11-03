@@ -29,7 +29,7 @@ const Layout = ({ children }) => (
         >
           <html lang="en" />
         </Helmet>
-        <Header TitleStuff="Team Awesome!"/>
+        <Header TitleStuff="1000 Words"/>
         <div
           style={{
             margin: '0 auto',
