@@ -1,6 +1,5 @@
-import React from 'react'
-import { Link } from 'gatsby'
-import './css/footer.css'
+import React from 'react';
+import './css/footer.css';
 
 const Footer = () => (
   <div className="footer">
