@@ -4,7 +4,7 @@ import { Link } from 'gatsby'
 const Footer = () => (
   <div
     style={{
-      background: 'rgb(13, 136, 237)',
+      background: '#333333',
       marginBottom: '0rem',
     }}
   >
@@ -23,7 +23,6 @@ const Footer = () => (
             textDecoration: 'none',
           }}
         >
-          This is a site thing.
         </Link>
       </h1>
     </div>

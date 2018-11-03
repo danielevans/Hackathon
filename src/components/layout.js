@@ -29,7 +29,7 @@ const Layout = ({ children }) => (
         >
           <html lang="en" />
         </Helmet>
-        <Header TitleStuff="Team Awesome!"/>
+        <Header TitleStuff=""/>
         <div
           style={{
             margin: '0 auto',
@@ -41,7 +41,6 @@ const Layout = ({ children }) => (
           {children}
         </div>
         <Footer />
-        Checking.
       </>
     )}
   />
