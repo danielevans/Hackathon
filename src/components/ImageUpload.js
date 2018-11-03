@@ -1,6 +1,8 @@
 import React from 'react';
 import './css/imageUpload.css';
 
+import ImageTag from './ImageTag';
+
 class ImageUpload extends React.Component {
     state = {
         tags: [],
@@ -41,7 +43,6 @@ class ImageUpload extends React.Component {
     render() {
         return(
             <div>
-                <h2>Image Upload</h2>
                 <div className="upload__options">
                     <div className="upload__url">
                         <div>Enter Image URL</div>
@@ -54,12 +55,18 @@ class ImageUpload extends React.Component {
                     </div>
                 </div>
                 <div className="image__display">
-                    <img src={this.state.url}></img>
+                    <div className="image__div">
+                    <img className="image" src={this.state.url}/>
+                    </div>
                     
-                    <h2>tags</h2>
-                    <ul>
-                    {this.state.tags.map((tag)=><li>{tag}</li>)}
-                    </ul>
+                    
+                    
+                    <div className="image__tags">
+                        {this.state.tags.map((tag)=><ImageTag 
+                            tagName = {tag}
+                        />)}
+                    </div>
+                    
                 </div>
             </div>
         );

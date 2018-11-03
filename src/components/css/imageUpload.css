@@ -23,7 +23,7 @@
 }
 .image__div{
   width:50%;
-  border:1px solid black;
+  text-align: center;
 }
 .image {
   height:40vh;
@@ -44,7 +44,7 @@
   color: white;
   border-radius:5px;
   padding: 0px 5px;
-  margin: 0px 3px;
+  margin: 3px;
   height:30px;
 }
 
