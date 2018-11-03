@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from 'gatsby'
-import './footer.css'
+import './components.css'
 
 const Footer = () => (
-  <div className="footer">
+  <div className="headerFooter">
     <div className="footerContent">
       <p style={{ margin: 0 }}>
         © 2018, PDX Hackathon Group with Peter, Daniel1, DanielA, Aaron, and Tony!
