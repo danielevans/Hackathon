@@ -1,0 +1,4 @@
+.uploadOptions {
+    display: flex;
+    flex-direction: row;
+}
