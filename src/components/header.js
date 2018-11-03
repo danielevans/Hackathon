@@ -3,7 +3,7 @@ import { Link } from 'gatsby'
 import './components.css'
 
 export default props => (
-  <div className="headerFooter">
+  <div className="header">
     <div className="headerContent">
       <h1>
         <Link to="/">{props.TitleStuff}</Link>
