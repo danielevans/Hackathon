@@ -1,5 +1,5 @@
 import React from 'react';
-import './components.css';
+import './css/imageUpload.css';
 
 class ImageUpload extends React.Component {
     state = {
