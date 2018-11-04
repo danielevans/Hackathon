@@ -35,15 +35,7 @@ const Layout = ({children}) => (<StaticQuery query={graphql `
 <Header TitleStuff="1000 Words"/>
 <div>
   <div className="center">
-    <Card>
-      {children}
-      <div style={{
-          margin: `3rem auto`,
-          maxWidth: 600
-        }}>
-        <ImageUpload/>
-      </div>
-    </Card>
+    {children}
   </div>
 </div>
 <Footer/>
