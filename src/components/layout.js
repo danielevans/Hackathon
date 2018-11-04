@@ -34,9 +34,7 @@ const Layout = ({children}) => (<StaticQuery query={graphql `
 </Helmet>
 <Header TitleStuff="1000 Words"/>
 <div>
-  <div className="center">
-    {children}
-  </div>
+  {children}
 </div>
 <Footer/>
 </>)}/>)
