@@ -32,17 +32,14 @@
 .upload__search{
   margin-left:50px;
 }
-
-
-
 .image__display{
   display:flex;
   flex-direction: row;
-  margin-top:30px;
+  margin: 30px 15% 0px 15%;
   
 }
 .image__div{
-  width:50%;
+  width:60%;
   text-align: center;
 }
 .image {
@@ -55,7 +52,7 @@
   flex-wrap: wrap;
   height:65px;
   width:40%;
-  margin-left:10px;
+  
   
 }
 .image__tag{
@@ -63,6 +60,7 @@
   background-color: rgb(198,156,105);
   color: white;
   border-radius:5px;
+  font-size:18px;
   padding: 0px 10px;
   margin: 3px;
   height:30px;
