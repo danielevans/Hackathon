@@ -15,7 +15,7 @@ class IndexPage extends React.Component{
       <Layout>
         <h1>Image media match</h1>
         <ImageUpload />
-        <returnImage result={props.GBinfo}/>
+        
       </Layout>
     );
   }
