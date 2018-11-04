@@ -18,6 +18,4 @@ var ConceptNet = {
   }
 };
 
-window.ConceptNet = ConceptNet;
-
 export default ConceptNet;
