@@ -1,20 +1,40 @@
 /* image upload css */
 .upload__options {
-  display: flex;
-  flex-direction: row;
-  margin: 0 5%;
+  padding: 30px;
+  width:450px;
+  margin: 0 auto;
+  
 }
-.upload__url {
-  width:50%;
-  text-align: center;
-}
+
 .upload__input{
   width:70%;
 }
 .upload__link {
-  width:60%;
+  text-align: left;
+  padding-bottom:10px;
+}
+.upload__text {
   text-align: center;
 }
+.upload__url {
+  padding-top:10px;
+}
+.upload__input{
+  width:275px;
+}
+.upload__change{
+  text-align: center;
+ 
+}
+.upload__current{
+  padding-bottom:10px;
+}
+.upload__search{
+  margin-left:50px;
+}
+
+
+
 .image__display{
   display:flex;
   flex-direction: row;
@@ -40,11 +60,17 @@
 }
 .image__tag{
   border: 1px solid grey;
-  background-color: rgba(58,96,110, .9);
+  background-color: rgb(198,156,105);
   color: white;
   border-radius:5px;
-  padding: 0px 5px;
+  padding: 0px 10px;
   margin: 3px;
   height:30px;
 }
+.image__tag--selected{
+  background-color: rgba(58,96,110, .9);
+}
 
+.image_refine{
+  margin-top:20px;
+}
