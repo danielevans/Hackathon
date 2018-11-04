@@ -135,20 +135,22 @@ class ImageUpload extends React.Component {
             <div>
                 {uploader}{changeUpload}
                 <div className="image__display">
+
                     <div className="image__div">
                         <img className="image" src={this.state.url}/>
                     </div>
-                    
+
                     <div className="image__tags">
                         {this.state.tags.map((tag)=><ImageTag
+
                             key={tag} 
                             selectTag = {this.selectTagHandler}
+
                             tagName = {tag}
                             selectedTags = {this.state.selectedTags}
                         />)}
                        <div className="image_refine">{refineSearch}</div>
                     </div>
-                    
                 </div>
                 
             </div>
