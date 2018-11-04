@@ -6,7 +6,12 @@ import { Card, CardImg, CardTitle, CardText, CardBody, Breadcrumb, BreadcrumbIte
 const Footer = () => (
   <div className="footer">
     <div className="footerContent">
-      <p style={{ margin: 0 }}>
+      <p>
+        <a href="https://github.com/danielevans/Hackathon">
+          <img src="https://i.imgur.com/C2P70Cu.png" alt="Github Logo" id="github-logo"></img>
+        </a>
+      </p>
+      <p>
         © 2018, PDX Hackathon Group with Peter, Daniel1, DanielA, Aaron, and Tony!
       </p>
     </div>
