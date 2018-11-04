@@ -13,7 +13,7 @@ class IndexPage extends React.Component{
   render() {
     return (
       <Layout>
-        <h1>Image media match</h1>
+        
         <ImageUpload />
         
       </Layout>
