@@ -1,4 +1,10 @@
 /* image upload css */
+
+.main__header{
+  text-align: center;
+  font-weight:400;
+  font-size:28px;
+}
 .upload__options {
   padding: 30px;
   width:450px;

@@ -105,6 +105,7 @@ class ImageUpload extends React.Component {
     render() {
         let uploader = (this.state.uploadDisplay === true) ?
         <div>
+                <div className="main__header">Upload or link to an image</div>
                 <div className="upload__options">
                     <div className="upload__link">
                         <FileBase64
