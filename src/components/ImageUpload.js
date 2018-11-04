@@ -29,7 +29,38 @@ class ImageUpload extends React.Component {
         }
     }
     
-  
+    componentDidMount = () => {
+        try {
+            const tagsJSON = localStorage.getItem('tags');
+            const urlJSON = localStorage.getItem('url');
+            const filesJSON = localStorage.getItem('files');
+            const imageNameJSON = localStorage.getItem('imageName');
+            const tags = JSON.parse(tagsJSON);
+            const url = JSON.parse(urlJSON);
+            const files = JSON.parse(filesJSON);
+            const imageName = JSON.parse(imageNameJSON);
+
+            
+            if(tags){
+                this.setState(()=>({tags, url, files, imageName}))
+            }
+        } catch (e){
+            //do nothing
+        }
+    }
+
+    componentDidUpdate = (prevProps, prevState) => {
+        if (prevState.tags !== this.state.tags) {
+            const tags = JSON.stringify(this.state.tags);
+            const url = JSON.stringify(this.state.url);
+            const files = JSON.stringify(this.state.files);
+            const imageName = JSON.stringify(this.state.imageName);
+            localStorage.setItem('tags', tags);
+            localStorage.setItem('url', url);
+            localStorage.setItem('files', files);
+            localStorage.setItem('imageName', imageName);
+        }
+    }
     
     
     bindInput = (input) => {
@@ -50,10 +81,11 @@ class ImageUpload extends React.Component {
         })
         .then(response => {
             var concepts = response['outputs'][0]['data']['concepts']
-            console.log("concepts", concepts);
+          
             const imageTags = concepts.map((tag)=>tag.name);
-            console.log('link array', imageTags);
-            this.setState({tags: imageTags, uploadDisplay: false})
+           
+            this.setState(()=>({tags: imageTags, uploadDisplay: false}))
+            
         })
     }
 
@@ -61,7 +93,7 @@ class ImageUpload extends React.Component {
     getFiles(files){
         // this.setState({ files: files })
         
-        console.log("FILES", files);
+       
         // console.log("FILE DATA", files[0].base64)
         this.uploadAPIHandler(files[0]);
         
@@ -73,9 +105,9 @@ class ImageUpload extends React.Component {
             (response) => {
                 var concepts = response['outputs'][0]['data']['concepts']
                 const imageTags = concepts.map((tag)=>tag.name);
-                console.log('file', file);
+               
               
-              this.setState({tags: imageTags, url: file.base64, imageName: file.name, uploadDisplay: false, selectedTags: []})
+              this.setState(()=>({tags: imageTags, url: file.base64, imageName: file.name, uploadDisplay: false, selectedTags: []}))
             }
             // ,
             // function(err) {
@@ -89,14 +121,14 @@ class ImageUpload extends React.Component {
 
     selectTagHandler = (tagName) => {
         let selected = [...this.state.selectedTags];
-        console.log(selected);
+        
         if(selected.indexOf(tagName)<0){
-            console.log('push tag', tagName);
+            
             selected.push(tagName);
             this.setState({selectedTags: selected});
         } else{
             let index = selected.indexOf(tagName)
-            console.log('splice tag', index);
+            
             selected.splice(index, 1);
             this.setState({selectedTags: selected});
         }
@@ -138,7 +170,7 @@ class ImageUpload extends React.Component {
                 <div className="image__display">
 
                     <div className="image__div">
-                        <img className="image" src={this.state.url}/>
+                        <img className="image" src={this.state.url} alt="image"/>
                     </div>
 
                     <div className="image__tags">
