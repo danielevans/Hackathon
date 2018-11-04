@@ -5,7 +5,7 @@ const ImageTag = (props)=>{
     let selected = props.selectedTags;
     
     let index = selected.indexOf(props.tagName);
-    console.log("index", index);
+    
 
     let selectedDisplay = (index>-1) ?
     <div className="image__tag image__tag--selected" onClick={()=>props.selectTag(props.tagName)}>
