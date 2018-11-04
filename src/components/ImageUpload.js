@@ -25,7 +25,8 @@ class ImageUpload extends React.Component {
             url: "",
             imageName: "",
             files: [],
-            uploadDisplay: true
+            uploadDisplay: true,
+            imageDisplayed: false
         }
     }
     
@@ -69,7 +70,7 @@ class ImageUpload extends React.Component {
     selectURL = () => {
         let imageURL = this.state.urlInput.toString();
         
-        this.setState({url: imageURL, imageName: imageURL, selectedTags: []})
+        this.setState({url: imageURL, imageName: imageURL, selectedTags: [], imageDisplayed: true})
         this.linkAPIHandler(imageURL);
     }
     
@@ -107,7 +108,7 @@ class ImageUpload extends React.Component {
                 const imageTags = concepts.map((tag)=>tag.name);
                
               
-              this.setState(()=>({tags: imageTags, url: file.base64, imageName: file.name, uploadDisplay: false, selectedTags: []}))
+              this.setState(()=>({tags: imageTags, url: file.base64, imageName: file.name, uploadDisplay: false, selectedTags: [], imageDisplayed: true}))
             }
             // ,
             // function(err) {
@@ -133,8 +134,27 @@ class ImageUpload extends React.Component {
             this.setState({selectedTags: selected});
         }
     }
+    removeImageHandler = () => {
+        this.setState(()=>({
+            tags: [],
+            selectedTags: [],
+            urlInput: "",
+            url: "",
+            imageName: "",
+            files: [],
+            uploadDisplay: true,
+            imageDisplayed: false
+        }))
+    }
 
     render() {
+        let close = (this.state.imageDisplayed === true) ?
+        <div class="image__close" onClick={()=>this.removeImageHandler()}><i className="fa fa-window-close"></i></div> : null
+
+        let imageDisplay = (this.state.imageDisplayed === true) ?
+        <img className="image" src={this.state.url} alt="image"/> : null
+
+        
         let uploader = (this.state.uploadDisplay === true) ?
         <div>
                 <div className="main__header">Upload or link to an image</div>
@@ -170,7 +190,8 @@ class ImageUpload extends React.Component {
                 <div className="image__display">
 
                     <div className="image__div">
-                        <img className="image" src={this.state.url} alt="image"/>
+                        {imageDisplay}
+                        {close}
                     </div>
 
                     <div className="image__tags">
