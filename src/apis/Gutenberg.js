@@ -93,8 +93,7 @@ var Gutenberg = {
     let file = `/gutenberg_data/aleph.gutenberg.org/${path}/${documentId}/${documentId}.json`;
     return fetch(Gutenberg.url(file)).then(async (response) => {
       let document = await response.json();
-      console.log(winner, winnerIndex, document["paragraphs"][winnerIndex]);
-      return document["paragraphs"][winnerIndex];
+      return { text: (document["paragraphs"][winnerIndex] || {})["text"], document: document, document_id: documentId };
     });
   },
 };
