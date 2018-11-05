@@ -2,11 +2,15 @@ import React from 'react';
 import ConceptNet from '../apis/ConceptNet';
 import Gutenberg from '../apis/Gutenberg';
 
+import './css/results.css'
+
 class GutenbergQuote extends React.Component  {
   constructor(props) {
     super(props);
     this.state = { text: "Loading" };
   }
+  
+  
   componentDidMount() {
     Promise.all(this.props.tags.map((tag) => {
       return ConceptNet.associations(tag);
@@ -30,7 +34,7 @@ class GutenbergQuote extends React.Component  {
 
   render() {
     return (
-      <p>
+      <p className="results__text">
         {this.state.text}
       </p>
     );

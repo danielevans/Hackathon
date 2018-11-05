@@ -1,0 +1,19 @@
+.results__header{
+    font-size:35px;
+    padding-bottom:10px;
+   
+    border-bottom: 3px solid rgb(3,3,3);
+    margin-bottom:40px;
+}
+
+
+
+.results__text{
+    border:1px solid black;
+    margin:0 10%;
+    padding:20px;
+    border-radius: 3px;
+    font-size:16px;
+    color:black;
+    
+}

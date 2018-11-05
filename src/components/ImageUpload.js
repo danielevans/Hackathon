@@ -6,6 +6,10 @@ import FileBase64 from 'react-file-base64';
 
 import ImageTag from './ImageTag';
 
+// import Results from './Results';
+
+import GutenbergQuote from './GutenbergQuote';
+
 const Clarifai = require('clarifai');
         
 const app = new Clarifai.App({
@@ -26,7 +30,8 @@ class ImageUpload extends React.Component {
             imageName: "",
             files: [],
             uploadDisplay: true,
-            imageDisplayed: false
+            imageDisplayed: false,
+            abbrevTags: []
         }
     }
     
@@ -84,16 +89,26 @@ class ImageUpload extends React.Component {
             var concepts = response['outputs'][0]['data']['concepts']
           
             const imageTags = concepts.map((tag)=>tag.name);
-           
-            this.setState(()=>({tags: imageTags, uploadDisplay: false}))
+            const abbrevTags = imageTags.slice(0,2);
+            this.setState(()=>({tags: imageTags, uploadDisplay: false, abbrevTags: abbrevTags}))
             
         })
     }
 
     //call clarifai API for image uploads
     getFiles(files){
-        // this.setState({ files: files })
         
+        this.setState(()=>({
+            tags: [],
+            selectedTags: [],
+            urlInput: "",
+            url: "",
+            imageName: "",
+            files: [],
+            uploadDisplay: false,
+            imageDisplayed: true,
+            abbrevTags: []
+        }))
        
         // console.log("FILE DATA", files[0].base64)
         this.uploadAPIHandler(files[0]);
@@ -106,9 +121,9 @@ class ImageUpload extends React.Component {
             (response) => {
                 var concepts = response['outputs'][0]['data']['concepts']
                 const imageTags = concepts.map((tag)=>tag.name);
-               
+                const abbrevTags = imageTags.slice(0,2);
               
-              this.setState(()=>({tags: imageTags, url: file.base64, imageName: file.name, uploadDisplay: false, selectedTags: [], imageDisplayed: true}))
+              this.setState(()=>({tags: imageTags, url: file.base64, imageName: file.name, uploadDisplay: false, selectedTags: [], imageDisplayed: true, abbrevTags: abbrevTags}))
             }
             // ,
             // function(err) {
@@ -143,16 +158,35 @@ class ImageUpload extends React.Component {
             imageName: "",
             files: [],
             uploadDisplay: true,
-            imageDisplayed: false
+            imageDisplayed: false,
+            abbrevTags: []
         }))
     }
 
     render() {
         let close = (this.state.imageDisplayed === true) ?
-        <div class="image__close" onClick={()=>this.removeImageHandler()}><i className="fa fa-window-close"></i></div> : null
+        <div className="image__close" onClick={()=>this.removeImageHandler()}><i className="fa fa-window-close"></i></div> : null
 
         let imageDisplay = (this.state.imageDisplayed === true) ?
         <img className="image" src={this.state.url} alt="image"/> : null
+
+        let tagsDisplay = (this.state.imageDisplayed === true) ?
+        <div className="image__tags">
+                        {this.state.tags.map((tag)=><ImageTag
+                            key={tag} 
+                            selectTag = {this.selectTagHandler}
+                            tagName = {tag}
+                            selectedTags = {this.state.selectedTags}
+                        />)}
+                       <div className="image_refine">{refineSearch}</div>
+                    </div> :null
+
+        let gutenbergRender =(this.state.abbrevTags.length >0) ?
+        <GutenbergQuote 
+                    tags = {this.state.abbrevTags}
+                />:null
+                            
+
 
         
         let uploader = (this.state.uploadDisplay === true) ?
@@ -194,18 +228,11 @@ class ImageUpload extends React.Component {
                         {close}
                     </div>
 
-                    <div className="image__tags">
-                        {this.state.tags.map((tag)=><ImageTag
-
-                            key={tag} 
-                            selectTag = {this.selectTagHandler}
-
-                            tagName = {tag}
-                            selectedTags = {this.state.selectedTags}
-                        />)}
-                       <div className="image_refine">{refineSearch}</div>
-                    </div>
+                    {tagsDisplay}
                 </div>
+                <div className="results__header">Results</div>
+                {gutenbergRender}
+                
                 
             </div>
         );
