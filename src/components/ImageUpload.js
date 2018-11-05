@@ -179,7 +179,7 @@ class ImageUpload extends React.Component {
         let changeUpload = (this.state.uploadDisplay === false) ?
         <div className="upload__change">
             <div className="upload__current">Current Upload:{this.state.imageName}</div>
-            <button onClick={()=>this.displayUpload()}>Upload new photo</button> 
+            <button className="upload__button" onClick={()=>this.displayUpload()}>Upload new photo</button> 
         </div>: null
 
         let refineSearch = (this.state.selectedTags.length > 4) ?
