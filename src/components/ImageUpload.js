@@ -34,39 +34,7 @@ class ImageUpload extends React.Component {
             abbrevTags: []
         }
     }
-    
-    componentDidMount = () => {
-        try {
-            const tagsJSON = localStorage.getItem('tags');
-            const urlJSON = localStorage.getItem('url');
-            const filesJSON = localStorage.getItem('files');
-            const imageNameJSON = localStorage.getItem('imageName');
-            const tags = JSON.parse(tagsJSON);
-            const url = JSON.parse(urlJSON);
-            const files = JSON.parse(filesJSON);
-            const imageName = JSON.parse(imageNameJSON);
 
-            
-            if(tags){
-                this.setState(()=>({tags, url, files, imageName}))
-            }
-        } catch (e){
-            //do nothing
-        }
-    }
-
-    componentDidUpdate = (prevProps, prevState) => {
-        if (prevState.tags !== this.state.tags) {
-            const tags = JSON.stringify(this.state.tags);
-            const url = JSON.stringify(this.state.url);
-            const files = JSON.stringify(this.state.files);
-            const imageName = JSON.stringify(this.state.imageName);
-            localStorage.setItem('tags', tags);
-            localStorage.setItem('url', url);
-            localStorage.setItem('files', files);
-            localStorage.setItem('imageName', imageName);
-        }
-    }
     
     
     bindInput = (input) => {
