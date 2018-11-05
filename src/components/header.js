@@ -8,6 +8,7 @@ export default props => (
       <h1>
         <Link to="/">{props.TitleStuff}</Link>
       </h1>
+      <h2>An image search for written media</h2>
     </div>
   </div>
 )

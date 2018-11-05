@@ -1,6 +1,6 @@
 .footer {
   color: white;
-  background: rgb(13, 136, 237);
+  background: rgb(58, 96, 110);
 }
 
 .footerContent {
@@ -17,3 +17,4 @@
 .footerContent #github-logo {
   width: 60px;
 }
+

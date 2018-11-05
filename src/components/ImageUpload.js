@@ -14,11 +14,53 @@ const app = new Clarifai.App({
 
 
 class ImageUpload extends React.Component {
-    state = {
-        tags: [],
-        urlInput: "",
-        url: "",
-        files: []
+    constructor(props) {
+        super(props);
+        this.selectTagHandler = this.selectTagHandler.bind(this);
+
+        this.state = {
+            tags: [],
+            selectedTags: [],
+            urlInput: "",
+            url: "",
+            imageName: "",
+            files: [],
+            uploadDisplay: true,
+            imageDisplayed: false
+        }
+    }
+    
+    componentDidMount = () => {
+        try {
+            const tagsJSON = localStorage.getItem('tags');
+            const urlJSON = localStorage.getItem('url');
+            const filesJSON = localStorage.getItem('files');
+            const imageNameJSON = localStorage.getItem('imageName');
+            const tags = JSON.parse(tagsJSON);
+            const url = JSON.parse(urlJSON);
+            const files = JSON.parse(filesJSON);
+            const imageName = JSON.parse(imageNameJSON);
+
+            
+            if(tags){
+                this.setState(()=>({tags, url, files, imageName}))
+            }
+        } catch (e){
+            //do nothing
+        }
+    }
+
+    componentDidUpdate = (prevProps, prevState) => {
+        if (prevState.tags !== this.state.tags) {
+            const tags = JSON.stringify(this.state.tags);
+            const url = JSON.stringify(this.state.url);
+            const files = JSON.stringify(this.state.files);
+            const imageName = JSON.stringify(this.state.imageName);
+            localStorage.setItem('tags', tags);
+            localStorage.setItem('url', url);
+            localStorage.setItem('files', files);
+            localStorage.setItem('imageName', imageName);
+        }
     }
     
     
@@ -28,7 +70,7 @@ class ImageUpload extends React.Component {
     selectURL = () => {
         let imageURL = this.state.urlInput.toString();
         
-        this.setState({url: imageURL})
+        this.setState({url: imageURL, imageName: imageURL, selectedTags: [], imageDisplayed: true})
         this.linkAPIHandler(imageURL);
     }
     
@@ -40,10 +82,11 @@ class ImageUpload extends React.Component {
         })
         .then(response => {
             var concepts = response['outputs'][0]['data']['concepts']
-            console.log("concepts", concepts);
+          
             const imageTags = concepts.map((tag)=>tag.name);
-            console.log('link array', imageTags);
-            this.setState({tags: imageTags})
+           
+            this.setState(()=>({tags: imageTags, uploadDisplay: false}))
+            
         })
     }
 
@@ -51,7 +94,7 @@ class ImageUpload extends React.Component {
     getFiles(files){
         // this.setState({ files: files })
         
-        console.log("FILES", files);
+       
         // console.log("FILE DATA", files[0].base64)
         this.uploadAPIHandler(files[0]);
         
@@ -63,9 +106,9 @@ class ImageUpload extends React.Component {
             (response) => {
                 var concepts = response['outputs'][0]['data']['concepts']
                 const imageTags = concepts.map((tag)=>tag.name);
-                console.log('uploadarray', imageTags);
+               
               
-              this.setState({tags: imageTags, url: file.base64})
+              this.setState(()=>({tags: imageTags, url: file.base64, imageName: file.name, uploadDisplay: false, selectedTags: [], imageDisplayed: true}))
             }
             // ,
             // function(err) {
@@ -73,38 +116,97 @@ class ImageUpload extends React.Component {
             // }
           );
     }
-    
-    
+    displayUpload = () => {
+        this.setState({uploadDisplay: true})
+    }
+
+    selectTagHandler = (tagName) => {
+        let selected = [...this.state.selectedTags];
+        
+        if(selected.indexOf(tagName)<0){
+            
+            selected.push(tagName);
+            this.setState({selectedTags: selected});
+        } else{
+            let index = selected.indexOf(tagName)
+            
+            selected.splice(index, 1);
+            this.setState({selectedTags: selected});
+        }
+    }
+    removeImageHandler = () => {
+        this.setState(()=>({
+            tags: [],
+            selectedTags: [],
+            urlInput: "",
+            url: "",
+            imageName: "",
+            files: [],
+            uploadDisplay: true,
+            imageDisplayed: false
+        }))
+    }
 
     render() {
-        return(
-            <div>
+        let close = (this.state.imageDisplayed === true) ?
+        <div class="image__close" onClick={()=>this.removeImageHandler()}><i className="fa fa-window-close"></i></div> : null
+
+        let imageDisplay = (this.state.imageDisplayed === true) ?
+        <img className="image" src={this.state.url} alt="image"/> : null
+
+        
+        let uploader = (this.state.uploadDisplay === true) ?
+        <div>
+                <div className="main__header">Upload or link to an image</div>
                 <div className="upload__options">
-                    <div className="upload__url">
-                        <div>Enter Image URL</div>
-                        <input type="text" onChange={(e)=>this.bindInput(e.target.value)}/>
-                        <button onClick={()=>this.selectURL()}>Select URL</button>
-                    </div>
                     <div className="upload__link">
-                        
                         <FileBase64
                             multiple={ true }
                             onDone={ this.getFiles.bind(this) } />
-
                     </div>
+                    <div className="upload__text">OR</div>
+                    <div className="upload__url">
+                        <input placeholder="Enter Image URL" className="upload__input" type="text" onChange={(e)=>this.bindInput(e.target.value)}/>
+                        <button className="upload__button" onClick={()=>this.selectURL()}>Select URL</button>
+                    </div>
+                    
                 </div>
+                
+            </div> : null
+
+        let changeUpload = (this.state.uploadDisplay === false) ?
+        <div className="upload__change">
+            <div className="upload__current">Current Upload:{this.state.imageName}</div>
+            <button onClick={()=>this.displayUpload()}>Upload new photo</button> 
+        </div>: null
+
+        let refineSearch = (this.state.selectedTags.length > 4) ?
+        <button className="upload__search">Search selected tags</button> : null
+
+
+        return(
+            <div>
+                {uploader}{changeUpload}
                 <div className="image__display">
 
                     <div className="image__div">
-                    <img className="image" src={this.state.url}/>
+                        {imageDisplay}
+                        {close}
                     </div>
 
                     <div className="image__tags">
                         {this.state.tags.map((tag)=><ImageTag
+
+                            key={tag} 
+                            selectTag = {this.selectTagHandler}
+
                             tagName = {tag}
+                            selectedTags = {this.state.selectedTags}
                         />)}
+                       <div className="image_refine">{refineSearch}</div>
                     </div>
                 </div>
+                
             </div>
         );
     }

@@ -1,50 +1,112 @@
 /* image upload css */
-.upload__options {
-  display: flex;
-  flex-direction: row;
-  margin: 0 5%;
-}
-.upload__url {
-  width:50%;
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
+.main__header{
   text-align: center;
+  font-weight:400;
+  font-size:28px;
 }
+.upload__options {
+  padding: 30px;
+  width:450px;
+  margin: 0 auto;
+  
+}
+
 .upload__input{
   width:70%;
 }
 .upload__link {
-  width:60%;
+  text-align: left;
+  padding-bottom:10px;
+}
+.upload__text {
   text-align: center;
 }
+.upload__url {
+  padding-top:10px;
+}
+.upload__input{
+  width:275px;
+}
+.upload__change{
+  text-align: center;
+ 
+}
+.upload__current{
+  padding-bottom:10px;
+}
+.upload__search{
+  margin-left:50px;
+}
+
 .image__display{
   display:flex;
   flex-direction: row;
+
+  margin: 0 auto;
   margin-top:30px;
+  max-width:1140px;
+
+  margin: 30px 15% 0px 15%;
+
   
 }
 .image__div{
-  width:50%;
+  width:60%;
   text-align: center;
+  position: relative;
+
 }
 .image {
   height:40vh;
   
+  z-index: 5;
 }
+.image__close{
+  position: absolute;
+  top:10px;
+  right:130px;
+  z-index:10;
+  width:30px;
+  height:30px;
+  text-align: center;
+  font-size:26px;
+  color: rgb(51,51,51);
+  padding:1.5px;
+  transition: .2s all;
+}
+.image__close:hover{
+  color:white;
+  background-color: rgb(51,51,51);
+}
+
 .image__tags{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   height:65px;
   width:40%;
-  margin-left:10px;
-  
 }
 .image__tag{
   border: 1px solid grey;
-  background-color: rgba(58,96,110, .9);
+  background-color: rgb(198,156,105);
   color: white;
   border-radius:5px;
-  padding: 0px 5px;
+  font-size:18px;
+  padding: 0px 10px;
   margin: 3px;
   height:30px;
 }
+.image__tag:hover{
+  font-weight: bold;
+  transform: scale(1.1);
+  cursor: pointer;
+  font-size: 20px;
+}
+.image__tag--selected{
+  background-color: rgba(58,96,110, .9);
+}
 
+.image_refine{
+  margin-top:20px;
+}
